@@ -1,0 +1,39 @@
+version: "3"
+services:
+  clock:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: clock
+    volumes:
+      - .:/clock
+    image: clock
+    command: /bin/bash -c "sleep 5 && /clock/run.sh"
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: staging
+      RACK_ENV: staging
+
+      API_ROOT: /clock
+      APP_PORT: 3000
+      APP_NAME: clock
+
+      #Database
+      # default: development
+      DB_NAME: clock_development
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_POOL: 5
+
+      #PumaServer
+      PUMA_THREADS_MIN: 0
+      PUMA_THREADS_MAX: 16
+      PUMA_WORKERS: 0
+
+networks:
+  default:
+    external:
+      name: plevym
