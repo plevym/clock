@@ -9,6 +9,10 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+
 # Logging
 gem 'lograge'
 gem 'logstash-logger'
@@ -22,6 +26,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+   # Testing
+  gem 'factory_bot_rails'
+  gem 'faker', '~> 1.8', '>= 1.8.7'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
@@ -33,9 +42,6 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.2'
-  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
-  gem 'faker', '~> 1.8', '>= 1.8.7'
-  gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
 end
 
 
