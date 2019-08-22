@@ -1,6 +1,6 @@
 # Clock
 
-Welcome to the Clock API! You can use this API to process payments and refunds, and create customers and cards.
+Welcome to the Clock API! You can use this API to check in and out from work, and to generate working hours reports.
 
 ## Prerequisites
 
