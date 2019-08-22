@@ -1,7 +1,7 @@
 FROM ruby:2.5.1
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev git
 
-ENV INSTALL_PATH /todos
+ENV INSTALL_PATH /clock
 WORKDIR $INSTALL_PATH
 
 COPY Gemfile* $INSTALL_PATH/

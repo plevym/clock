@@ -1,6 +1,8 @@
 version: "3"
 services:
   clock:
+    depends_on:
+      - postgres
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -8,7 +10,7 @@ services:
     volumes:
       - .:/clock
     image: clock
-    command: /bin/bash -c "sleep 5 && /clock/run.sh"
+    command: "/clock/run.sh"
     ports:
       - "3000:3000"
     environment:
@@ -20,7 +22,6 @@ services:
       APP_NAME: clock
 
       #Database
-      # default: development
       DB_NAME: clock_development
       DB_USERNAME: root
       DB_PASSWORD: password
@@ -33,6 +34,15 @@ services:
       PUMA_THREADS_MAX: 16
       PUMA_WORKERS: 0
 
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
 networks:
   default:
     external:
