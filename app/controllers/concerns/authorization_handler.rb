@@ -6,21 +6,15 @@ module AuthorizationHandler
       token = bearer_token
       raise Clock::Errors::Unauthorized.new unless token.present?
 
-      begin
-        decoded_token  = JsonWebToken.decode(token)
-        permissions    = decoded_token.first['per']
-        user_id        = decoded_token.first['user_id']
-        has_permission = permissions.include?(PERMISSIONS[action])
-        @current_user  = User.find(user_id)
+      decoded_token  = JsonWebToken.decode(token)
+      permissions    = decoded_token.first['per']
+      user_id        = decoded_token.first['user_id']
+      has_permission = permissions.include?(PERMISSIONS[action])
+      @current_user  = User.find(user_id)
 
-        authorized = has_permission && authorize_action(resource, action)
+      authorized = has_permission && authorize_action(resource, action)
 
-        raise Clock::Errors::ForbiddenAction.new unless authorized
-      rescue JWT::ExpiredSignature
-        raise Clock::Errors::ExpiredToken.new
-      rescue JWT::ImmatureSignature
-        raise Clock::Errors::Unauthorized.new
-      end
+      raise Clock::Errors::ForbiddenAction.new unless authorized
     end
 
     def bearer_token

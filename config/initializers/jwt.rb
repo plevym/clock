@@ -8,5 +8,9 @@ class JsonWebToken
 
   def self.decode(token)
     JWT.decode(token, SECRET_KEY)
+  rescue JWT::ExpiredSignature
+    raise Clock::Errors::ExpiredToken.new
+  rescue JWT::ImmatureSignature
+    raise Clock::Errors::Unauthorized.new
   end
 end
