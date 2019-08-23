@@ -21,10 +21,6 @@ RSpec.describe UsersController, type: :controller do
           .to receive(:decode)
           .and_return(decoded_token)
 
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
-
         request.headers.merge!(auth_headers)
       end
 
@@ -132,10 +128,6 @@ RSpec.describe UsersController, type: :controller do
           .to receive(:decode)
           .and_return(decoded_token)
 
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
-
         request.headers.merge!(auth_headers)
       end
 
@@ -235,10 +227,6 @@ RSpec.describe UsersController, type: :controller do
           .to receive(:decode)
           .and_return(decoded_token)
 
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
-
         request.headers.merge!(auth_headers)
       end
 
@@ -337,10 +325,6 @@ RSpec.describe UsersController, type: :controller do
           .to receive(:decode)
           .and_return(decoded_token)
 
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
-
         request.headers.merge!(auth_headers)
       end
 
@@ -435,10 +419,6 @@ RSpec.describe UsersController, type: :controller do
         allow(JsonWebToken)
           .to receive(:decode)
           .and_return(decoded_token)
-
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
 
         request.headers.merge!(auth_headers)
       end
@@ -537,10 +517,6 @@ RSpec.describe UsersController, type: :controller do
         allow(JsonWebToken)
           .to receive(:decode)
           .and_return(decoded_token)
-
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
 
         request.headers.merge!(auth_headers)
       end
@@ -645,10 +621,6 @@ RSpec.describe UsersController, type: :controller do
         allow(JsonWebToken)
           .to receive(:decode)
           .and_return(decoded_token)
-
-        allow_any_instance_of(User)
-          .to receive(:authorized_action?)
-          .and_return(true)
 
         request.headers.merge!(auth_headers)
       end

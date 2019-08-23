@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize_request(UPDATE_USERS, @user)
+    authorize_request(UPDATE_USER, @user)
 
     @user.update!(user_params)
 
