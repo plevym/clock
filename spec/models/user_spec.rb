@@ -54,49 +54,4 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#authorized_action?' do
-    let(:admin_role) { create(:role, name: 'admin') }
-    let(:user_role)  { create(:role, name: 'user') }
-    let(:user1) do
-      user = create(:user)
-      user.roles << admin_role
-
-      user
-    end
-    let(:user2) do
-      user = create(:user)
-      user.roles << user_role
-
-      user
-    end
-
-    context 'with admin role' do
-      it 'returns true' do
-        expect(user1.authorized_action?(user1, 'action')).to be(true)
-      end
-    end
-
-    context 'without admin role' do
-      context 'when editing same user' do
-        context 'with authorized action' do
-          actions = [READ_USER, UPDATE_USERS, CHECK_TIME, CREATE_REPORT]
-          action = actions.sample
-          it 'returns true' do
-            expect(user2.authorized_action?(user2, action)).to be(true)
-          end
-        end
-        context 'with unauthorized action' do
-          it 'returns false' do
-            expect(user2.authorized_action?(user2, 'unauthorized')).to be(false)
-          end
-        end
-      end
-
-      context 'when editing another user' do
-        it 'returns false' do
-          expect(user1.authorized_action?(user2, 'action')).to be(false)
-        end
-      end
-    end
-  end
 end

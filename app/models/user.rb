@@ -31,14 +31,7 @@ class User < ApplicationRecord
     roles.pluck(:name).include?('admin')
   end
 
-  def authorized_action?(user, action)
-    return true if user.admin?
-
-    case action
-    when READ_USER, UPDATE_USERS, CHECK_TIME, CREATE_REPORT
-      user == self
-    else
-      false
-    end
+  def owner
+    self
   end
 end

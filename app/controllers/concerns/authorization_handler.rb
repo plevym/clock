@@ -9,25 +9,30 @@ module AuthorizationHandler
       decoded_token  = JsonWebToken.decode(token)
       permissions    = decoded_token.first['per']
       user_id        = decoded_token.first['user_id']
-      has_permission = permissions.include?(PERMISSIONS[action])
-      @current_user  = User.find(user_id)
+      current_user  = User.find_by(id: user_id)
 
-      authorized = has_permission && authorize_action(resource, action)
+      authorized = authorize_action(permissions, action, current_user, resource)
 
       raise Clock::Errors::ForbiddenAction.new unless authorized
     end
+  end
 
-    def bearer_token
-      pattern = /^Bearer /
-      header  = request.headers['Authorization']
+  def bearer_token
+    pattern = /^Bearer /
+    header  = request.headers['Authorization']
 
-      header.gsub(pattern, '') if header && header.match(pattern)
-    end
+    header.gsub(pattern, '') if header && header.match(pattern)
+  end
 
-    def authorize_action(resource, action)
-      return true if resource.nil?
+  private 
 
-      resource.authorized_action?(@current_user, action)
-    end
+  def authorize_action(permissions, action, user, resource)
+    return false if user.nil?
+    return true if permissions.include?(PERMISSIONS[action]) &&
+                   (resource.nil? || user == resource.owner)
+
+    action_on_any = action.split('_').join('_ANY_')
+
+    permissions.include?(PERMISSIONS[action_on_any])
   end
 end

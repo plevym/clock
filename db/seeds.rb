@@ -24,7 +24,7 @@ PERMISSIONS.each do |permission|
   Permission.create!(id: permission[1], name: permission[0])
 end
 
-user_permission_names = %w[READ_USER UPDATE_USERS CHECK_TIME CREATE_REPORT]
+user_permission_names = %w[READ_USER CHECK_TIME CREATE_REPORT]
 
 user_permission_names.each do |permission_name|
   user_role.permissions << Permission.find_by(name: permission_name)
