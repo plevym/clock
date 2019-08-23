@@ -591,8 +591,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'report' do
-    let(:check1) { build(:time_check, created_at: Time.now - 1.hour) }
-    let(:check2) { build(:time_check) }
+    let(:check1) { build(:time_check, time_checked: Time.now - 1.hour) }
+    let(:check2) { build(:time_check, time_checked: Time.now) }
     let(:user)   do
       user = create(:user)
       user.time_checks << check1
