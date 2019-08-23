@@ -22,7 +22,7 @@ class AuthenticationController < ApplicationController
     time = Time.now + 24.hours.to_i
     response = {
       token: "Bearer #{token}",
-      exp: time.strftime('%m-%d-%Y %H:%M'),
+      exp: time.strftime('%d/%m/%Y %H:%M:%S'),
       username: user.username
     }
 
