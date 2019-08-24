@@ -21,7 +21,7 @@ admin.roles << admin_role
 user.roles << user_role
 
 PERMISSIONS.each do |permission|
-  Permission.create!(id: permission[1], name: permission[0])
+  admin_role.permissions << Permission.create!(id: permission[1], name: permission[0])
 end
 
 user_permission_names = %w[READ_USER CHECK_TIME CREATE_REPORT]

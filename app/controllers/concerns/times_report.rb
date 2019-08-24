@@ -3,7 +3,7 @@ class TimesReport
   HEADERS = %w[date check_in check_out hours_worked].freeze
 
   def initialize(time_checks, timezone)
-    timezone = 'America/Mexico_City' if timezone.nil?
+    timezone ||= 'UTC'
 
     @time_checks = time_checks
     @timezone    = timezone

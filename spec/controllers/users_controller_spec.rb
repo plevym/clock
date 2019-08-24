@@ -132,7 +132,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'returns all users' do
-        post(:index)
+        get(:index)
 
         body = JSON.parse(response.body)
 
@@ -144,7 +144,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'with no authorization token' do
       it 'returns 401' do
-        post(:index)
+        get(:index)
 
         expect(response.status).to eq(401)
       end
@@ -158,7 +158,7 @@ RSpec.describe UsersController, type: :controller do
       it 'returns 401' do
         request.env.merge!(auth_headers)
 
-        post(:index)
+        get(:index)
 
         expect(response.status).to eq(401)
       end
@@ -172,7 +172,7 @@ RSpec.describe UsersController, type: :controller do
       it 'returns 401' do
         request.env.merge!(auth_headers)
 
-        post(:index)
+        get(:index)
 
         expect(response.status).to eq(401)
       end
@@ -196,7 +196,7 @@ RSpec.describe UsersController, type: :controller do
       it 'returns 403' do
         request.headers.merge!(auth_headers)
 
-        post(:index)
+        get(:index)
 
         expect(response.status).to eq(403)
       end
@@ -243,7 +243,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'with no authorization token' do
       it 'returns 401' do
-        post(:index)
+        get(:index)
 
         expect(response.status).to eq(401)
       end
