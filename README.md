@@ -15,7 +15,7 @@ Welcome to the Clock API! You can use this API to check in and out from work, an
 
 This will start a container with the clock service running.
 
-`curl localhost:3000/clock/alive` to check if the service is running
+`curl localhost:3010/clock/alive` to check if the service is running
 
 To access a terminal inside the clock container do `docker exec -it clock bash`
 
