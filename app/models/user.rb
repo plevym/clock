@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def check_time
-    time_checks << TimeCheck.new
+    time_checks << TimeCheck.new(time_checked: Time.now.utc)
   end
 
   def times_report

@@ -3,7 +3,7 @@ class TimesReport
   HEADERS = %w[date check_in check_out hours_worked].freeze
 
   def initialize(time_checks, timezone)
-    timezone = 'America/Mexico_City' if timezone.nil?
+    timezone ||= 'UTC'
 
     @time_checks = time_checks
     @timezone    = timezone
@@ -53,8 +53,8 @@ class TimesReport
 
   def create_work_day(time_checks)
     date         = time_checks.first.date
-    first_time   = time_checks.first.created_at
-    second_time  = time_checks.last.created_at
+    first_time   = time_checks.first.time_checked
+    second_time  = time_checks.last.time_checked
 
     check_in      = time_to_string(first_time)
     check_out     = time_to_string(second_time)
@@ -64,8 +64,8 @@ class TimesReport
   end
 
   def hours_worked(time_checks)
-    start_time = time_checks.first.created_at
-    end_time   = time_checks.last.created_at
+    start_time = time_checks.first.time_checked
+    end_time   = time_checks.last.time_checked
     time_diff  = end_time - start_time
 
     Time.at(time_diff.to_i.abs).utc.strftime('%H:%M:%S')
